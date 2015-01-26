@@ -1,10 +1,10 @@
 {
-  "name": "01_mean-routing",
+  "name": "01_routing",
   "version": "0.1.0",
   "description": "Ejemplo sobre enrutamiento con Express",
   "main": "app/app.js",
   "bugs": {
-    "url": "https://github.com/koldohernandez/mean-stack-labs/issues",
+    "url": "https://github.com/koldohernandez/mean-stack-tuts/issues",
     "email": "info@koldohernandez.com"
   },
   "author": {
@@ -14,11 +14,11 @@
   },
   "license": {
     "type": "MIT",
-    "url": "https://github.com/koldohernandez/mean-stack-labs/blob/master/LICENSE"
+    "url": "https://github.com/koldohernandez/mean-stack-tuts/blob/master/LICENSE"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/koldohernandez/mean-stack-labs/"
+    "url": "https://github.com/koldohernandez/mean-stack-tuts/"
   },
   "dependencies": {
     "express": "^4.11.1"
