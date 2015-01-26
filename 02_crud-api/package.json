@@ -1,0 +1,31 @@
+{
+  "name": "02_create-api",
+  "version": "0.1.0",
+  "description": "Ejemplo sobre enrutamiento con Express",
+  "main": "app/app.js",
+  "bugs": {
+    "url": "https://github.com/koldohernandez/mean-stack-labs/issues",
+    "email": "info@koldohernandez.com"
+  },
+  "author": {
+    "name": "Koldo Hernández",
+    "email": "info@koldohernandez.com",
+    "url": "http://koldohernandez.com"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/koldohernandez/mean-stack-labs/blob/master/LICENSE"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/koldohernandez/mean-stack-labs/"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.10.2",
+    "express": "^4.11.1",
+    "mongoose": "^3.8.21",
+    "morgan": "^1.5.1"
+  },
+  "devDependencies": {}
+}
