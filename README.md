@@ -1,5 +1,4 @@
 # MEAN STACK
----
 
 Este repositorio contiene una serie de ejemplos de uso del stack MEAN (MongoDB-Express-AngularJS-NodeJS).
 
@@ -34,9 +33,9 @@ Debemos tener instalado:
 
 Además utilizaremos las siguientes herramientas para probar la API Rest:
 
-- Postman38 (Chrome) 
+- Postman (Chrome) 
 
-- RESTClient39 (Firefox)
+- RESTClient (Firefox)
 
 
 
