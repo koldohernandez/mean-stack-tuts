@@ -9,26 +9,31 @@ module.exports = (function() {
     var apiRouter = express.Router();
 
 
+    /*
+        Autenticación
+    */
+    var AuthCtrl = require('../controllers/authController');
 
-    // middleware que se ejecuta antes que cualquier otra ruta de la api
-    apiRouter.use(function(req, res, next){
+    // Ruta de autenticación
+    apiRouter.route('/auth')
+        .post(AuthCtrl.authUser);
 
-    	console.log('Alguien usa la API: Validar usuario ');
-
-    	next();
-    });
+    // Middleware que se ejecuta antes que cualquier otra ruta de la api
+    apiRouter.use(AuthCtrl.checkToken);
+    
 
 
     /*
 		Punto de entrada a la API
     */
     apiRouter.get('/', function(req, res) { 
-    	res.json({ message: 'Hey! Este esta es la home de mi API' }); 
+    	res.send(req.decoded);
     });
 
 
+
     /*
-		Usuarios
+		Operaciones CRUD con Usuarios
     */
     var UsersCtrl = require('../controllers/userController');
     apiRouter.route('/users')
