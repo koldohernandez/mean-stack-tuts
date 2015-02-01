@@ -29,7 +29,8 @@ exports.authUser = function(req, res) {
 
 		// ... si no existe devolvemos el error
 		if (!user) {
-			res.json({ success: false, message: 'El usuario ' + req.body.username + ' no existe' });
+
+			res.status(400).json({ error: 'El usuario ' + req.body.username + ' no existe' });
 		
 		} else {
 
@@ -40,7 +41,7 @@ exports.authUser = function(req, res) {
 			if (!passwordOK) {
 				
 				// ... devolvemos el error
-				res.json({ success: false, message: 'Contraseña incorrecta' });
+				res.status(400).json({ error: 'Contraseña incorrecta' });
 
 			} else {
 
@@ -57,7 +58,7 @@ exports.authUser = function(req, res) {
 				);
 
 				// ... y lo devolvemos
-				res.json({ success: true, message: 'Ahi va nuestro token!', token: token });
+				res.status(200).json({ success: true, message: 'Ahi va nuestro token!', token: token });
 
 			} // end if password
 				
@@ -73,7 +74,7 @@ exports.authUser = function(req, res) {
 exports.checkToken = function(req, res, next) {
 
 	// Recuperamos el token como valor por POST, de los parámetros de la URL o de la cabecera
-	var token = req.body.token || req.param('token') || req.headers['x-access-token'];
+	var token = req.body.token || req.params.token || req.headers['x-access-token'];
 
     // Si existe el token
     if (token) {
@@ -85,7 +86,7 @@ exports.checkToken = function(req, res, next) {
             if (err) {
 
                 // ... respondemos con un código de estado 403
-                return res.status(403).send({ success: false, message: 'Token de seguridad inválido' });
+                res.status(403).send({ error: 'Token de seguridad inválido' });
             
             } else {
 
@@ -103,7 +104,7 @@ exports.checkToken = function(req, res, next) {
     } else {
 
         // ... en caso de no existir, respondemos con un código de estado 403
-        return res.status(403).send({ success: false, message: 'Sin token de seguridad' });
+        res.status(403).send({ error: 'Sin token de seguridad' });
     }
 
 }

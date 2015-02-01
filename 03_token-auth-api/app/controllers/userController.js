@@ -20,15 +20,14 @@ exports.addUser = function(req, res) {
 
 		if (err) {
 
-			// clave duplicada
 			if (err.code == 11000) 
-				return res.json({ success: false, message: 'Usuario ya creado en la base de datos. Elije otro nombre.'});
+				return res.status(409).json({ error: 'Usuario ya creado en la base de datos. Elije otro nombre.'});
 			else
-				return res.send(err);
+				return res.status(412).send(err);
 
 		} 
 
-		res.json({ message: 'Usuario creado' });
+		return res.status(201).json({ success: true, message: 'Usuario creado' });
 
 	});
 
@@ -41,9 +40,10 @@ exports.findAllUsers = function(req, res) {
 
 	User.find(function (err, users) {
 
-		if (err) return res.send(err);
+		if (err) return res.status(412).send(err);
 
-		res.json(users);
+		res.status(200).json(users);
+		
 
 	});
 
@@ -69,12 +69,12 @@ exports.findByUsername = function(req, res) {
 
 	User.findOne({username: req.params.username}, function(err, user) {
 
-		if (err) return res.send(err);
+		if (err) return res.status(412).send(err);
 
 		if (user) 
-			res.json(user);
+			res.status(200).json(user);
 		else
-			res.json({ success: false, message: 'El usuario ' + req.params.username + ' no existe'});
+			res.status(400).json({ error: 'El usuario ' + req.params.username + ' no existe' });
 
 	});
 
@@ -88,7 +88,7 @@ exports.updateUser = function(req, res) {
 
 	User.findOne({username: req.params.username}, function(err, user) {
 
-		if (err) res.send(err);
+		if (err) return res.status(500).send({ success: false, error: err });
 
 		if (req.body.name) user.name = req.body.name;
 		if (req.body.password) user.password = req.body.password;
@@ -97,15 +97,14 @@ exports.updateUser = function(req, res) {
 
 			if (err) {
 
-				// clave duplicada
 				if (err.code == 11000) 
-					res.json({ success: false, message: 'Usuario ya creado en la base de datos. Elije otro nombre.'});
+					return res.status(409).json({ error: 'Usuario ya creado en la base de datos. Elije otro nombre.'});
 				else
-					res.send(err);
+					return res.status(412).send(err);
 
 			}
 			
-			res.json({ message: 'Usuario modificado' });
+			return res.status(201).json({ success: true, message: 'Usuario modificado correctamente' });
 
 		});
 
@@ -124,14 +123,14 @@ exports.deleteUser = function(req,res) {
 
 			User.remove({ username: req.params.username }, function(err, user) { 
 
-				if (err) res.send(err);
+				if (err) res.status(412).send(err);
 				
-				res.json({ message: 'Usuario borrado correctamente' });
+				return res.status(200).json({ message: 'Usuario borrado correctamente' });
 			});
 
 		} else {
 
-			res.json({ success: false, message: 'El usuario ' + req.params.username + ' no existe'});
+			return res.status(204).json({ error: 'El usuario ' + req.params.username + ' no existe'});
 
 		}
 		
